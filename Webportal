@@ -1,0 +1,164 @@
+# Web-project
+<?php include('server.php') ?>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Registration system PHP and MySQL</title>
+  <link rel="stylesheet" type="text/css" href="newregister.css">
+</head>
+<body>
+	<div id="login">
+  <div class="header">
+  	<h2>Register</h2>
+  </div>
+	
+  <form method="post" action="http://localhost/minorproject/register.php">
+  	<?php include('errors.php'); ?>
+  	<div class="input-group">
+  	  <label>Username</label>
+  	  <input type="text" name="username" value="<?php echo $username; ?>">
+  	</div>
+  	<div class="input-group">
+  	  <label>Email</label>
+  	  <input type="email" name="email" value="<?php echo $email; ?>">
+  	</div>
+  	<div class="input-group">
+  	  <label>Password</label>
+  	  <input type="password" name="password_1">
+  	</div>
+  	<div class="input-group">
+  	  <label>Confirm password</label>
+  	  <input type="password" name="password_2">
+  	</div>
+  	
+  </form>
+  </div>
+</body>
+</html>
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Placed</title>
+    <link rel="stylesheet" href="placed.css">
+    <link rel="icon" href="C:\it\vishnu.jpg">
+</head>
+<body>
+<center><h1>PLACED STUDENTS DETAILS</h1>   </center>
+<center><h2>ACADEMIC YEAR:2019-2023</h2>   </center>
+    <div>
+      <table border="5px">
+          <tr><th>S.NO</th><th>ROLL.NO</th><th>NAME</th><th>BRANCH</th><th>COMPANY</th><th>PACKAGE</th>
+          </tr>
+          <tr>
+              <td>1</td><td>21211a1241</td><td>G.Pranav </td><td>IT</td><td>Google</td><td>30LPA</td>
+          </tr>
+          <tr>
+              <td>2</td><td>21211a1218</td><td>P.Bhanu </td><td>IT</td><td>MicroSoft</td><td>25LPA</td>
+          </tr>   
+          <tr>
+              <td>3</td><td>21211a1237</td><td>E.SijjU</td><td>IT</td><td>Wipro</td><td>25LPA</td>
+          </tr>
+          <tr>
+              <td>4</td><td>21211a1259</td><td>K.Himaansh </td><td>IT</td><td>Infosis</td><td>20LPA</td>
+          </tr>
+          <tr>
+              <td>5</td><td>21211a1258</td><td>K.Aarthi</td><td>IT</td><td>Cognizant</td><td>15LPA</td>
+          </tr>
+          <tr>
+              <td>6</td><td>21211a1234</td><td>D.Sangeetha</td><td>IT</td><td>Tech Mahindra</td><td>15LPA</td>
+          </tr>
+          <tr>
+              <td>7</td><td>21211a1240</td><td>G.Vaishnavi</td><td>IT</td><td>Intel</td><td>15LPA</td>
+          </tr>
+          <tr>
+              <td>8</td><td>21211a0417</td><td>D.Raghava</td><td>ECE</td><td>Amazon</td><td>30LPA</td>
+          </tr>
+          <tr>
+              <td>9</td><td>21211a045</td><td>M.Pavan</td><td>ECE</td><td>Flipkart</td><td>20LPA</td>
+          </tr>
+          <tr>
+              <td>10</td><td>21211b124</td><td>J.Srikanth</td><td>CSE</td><td>MNCs</td><td>20LPA</td>
+          </tr>
+      </table>
+    </div>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html>
+<body>
+
+<?php
+session_start();
+
+// initializing variables
+$username = "";
+$email    = "";
+$errors = array(); 
+
+// connect to the database
+$db = mysqli_connect('localhost', 'root', '', 'project');
+
+if ($db->connect_error) {
+    die("Connection failed: " . $db->connect_error);
+}
+
+
+
+$sql = "SELECT id, username, email, img FROM users";
+$result = $db->query($sql);
+
+
+if ($result->num_rows > 0) {
+    // output data of each row
+    while($row = $result->fetch_assoc()) {
+        print "<br> id: ". $row["id"]. "<br> - Name: ". $row["username"]. "<br> - Email: " . $row["email"] . "<br>";
+      print "<img src=\"".$row["img"]."\">";
+     
+    }
+} else {
+    print "0 results";
+}
+
+
+
+$db->close();   
+        ?> 
+
+
+
+</body>
+</html>
+
+
+<?php include('server.php') ?>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Registration system PHP and MySQL</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+  <div class="header">
+  	<h2>Login</h2>
+  </div>
+	 
+  <form method="post" action="login.php">
+  	<?php include('errors.php'); ?>
+  	<div class="input-group">
+  		<label>Username</label>
+  		<input type="text" name="username" >
+  	</div>
+  	<div class="input-group">
+  		<label>Password</label>
+  		<input type="password" name="password">
+  	</div>
+  	
+  </form>
+</body>
+</html>
